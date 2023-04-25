@@ -13,13 +13,17 @@ from file import get_index_path, get_index_name_from_file_path, check_index_file
 app = Flask(__name__)
 
 
+@app.route('/')
+def home():
+    return "Server is running"
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
         return "Please send a POST request with a file", 400
     filepath = None
     try:
-        uploaded_file = request.files["file"]
+        uploaded_file = request.files["file"] 
 
         filename = uploaded_file.filename
         if check_file_is_compressed(filename) is False:
@@ -81,4 +85,4 @@ if __name__ == '__main__':
         os.makedirs(compress_path)
     if os.environ.get('CHAT_FILES_MAX_SIZE') is not None:
         app.config['MAX_CONTENT_LENGTH'] = int(os.environ.get('CHAT_FILES_MAX_SIZE'))
-    app.run(port=5000, host='0.0.0.0', debug=args.debug)
+    app.run(port=3000, host='0.0.0.0', debug=args.debug)

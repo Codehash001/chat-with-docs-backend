@@ -16,7 +16,7 @@ llm_predictor = LLMPredictor(llm=ChatOpenAI(
     temperature=0.2, model_name="gpt-3.5-turbo"))
 
 service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor)
-
+ 
 
 def create_index(filepath, index_name):
     index = get_index_by_index_name(index_name)
